@@ -52,7 +52,7 @@ parser.add_argument(
 
 parser.add_argument(
     "--cache_dir",
-    type=int,
+    type=str,
     default=None,
 )
 
