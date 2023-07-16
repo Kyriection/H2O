@@ -17,8 +17,8 @@ from utils_lm_eval.modify_llama import convert_kvcache_llama_heavy_recent, Llama
 parser = argparse.ArgumentParser()
 parser.add_argument("--heavy_ratio", type=float, default=0.1)
 parser.add_argument("--recent_ratio", type=float, default=0.1)
-parser.add_argument("--context_size", type=int, default=512)
-parser.add_argument("--window_size", type=int, default=256)
+parser.add_argument("--context_size", type=int, default=1024)
+parser.add_argument("--window_size", type=int, default=1024)
 parser.add_argument("--num_samples", type=int, default=1000)
 args = parser.parse_args()
 
@@ -50,7 +50,7 @@ model.half().eval().cuda()
 text = "\n\n".join(data["text"][: args.num_samples])
 encodings = tokenizer(text, return_tensors="pt")
 
-max_length = args.context_size + args.window_size
+max_length = args.context_size
 stride = args.window_size
 seq_len = encodings.input_ids.size(1)
 print(f"seq_len: {seq_len}")
