@@ -2,7 +2,8 @@
 
 
 import argparse
-import json, tqdm
+import json
+from tqdm import tqdm
 import torch
 import copy
 import os
