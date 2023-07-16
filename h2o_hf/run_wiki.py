@@ -31,8 +31,8 @@ cache_dir = '../hf_cache'
 
 data = load_dataset(dataset_name, task, split=split)
 
-# config = AutoConfig.from_pretrained(model_name_or_path, cache_dir=cache_dir)
-# tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, cache_dir=cache_dir)
+config = AutoConfig.from_pretrained(model_name_or_path, cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, cache_dir=cache_dir)
 # model = AutoModelForCausalLM.from_pretrained(model_name_or_path, cache_dir=cache_dir)
 
 # if args.heavy_ratio + args.recent_ratio < 1:
