@@ -18,6 +18,7 @@ parser.add_argument("--heavy_ratio", type=float, default=0.1)
 parser.add_argument("--recent_ratio", type=float, default=0.1)
 parser.add_argument("--context_size", type=int, default=512)
 parser.add_argument("--window_size", type=int, default=256)
+parser.add_argument("--num_samples", type=int, default=100)
 args = parser.parse_args()
 
 
