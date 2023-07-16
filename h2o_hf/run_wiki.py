@@ -34,20 +34,19 @@ data = load_dataset(dataset_name, task, split=split)
 
 config = AutoConfig.from_pretrained(model_name_or_path, cache_dir=cache_dir)
 tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, cache_dir=cache_dir)
-# model = AutoModelForCausalLM.from_pretrained(model_name_or_path, cache_dir=cache_dir)
+model = AutoModelForCausalLM.from_pretrained(model_name_or_path, cache_dir=cache_dir)
 
-# if args.heavy_ratio + args.recent_ratio < 1:
-#     print('Enable H2O')
-#     config.heavy_ratio = args.heavy_ratio
-#     config.recent_ratio = args.recent_ratio
-#     checkpoint = copy.deepcopy(model.state_dict())
-#     model = convert_kvcache_llama_heavy_recent(model, config)
-#     model.load_state_dict(checkpoint)
+if args.heavy_ratio + args.recent_ratio < 1:
+    print('Enable H2O')
+    config.heavy_ratio = args.heavy_ratio
+    config.recent_ratio = args.recent_ratio
+    checkpoint = copy.deepcopy(model.state_dict())
+    model = convert_kvcache_llama_heavy_recent(model, config)
+    model.load_state_dict(checkpoint)
 
 
-# model.half().eval().cuda()
+model.half().eval().cuda()
 
-import pdb; pdb.set_trace()
 text = "\n\n".join(data["text"][: args.num_samples])
 encodings = tokenizer(text, return_tensors="pt")
 
