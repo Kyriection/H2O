@@ -19,13 +19,15 @@ parser.add_argument("--heavy_ratio", type=float, default=0.1)
 parser.add_argument("--recent_ratio", type=float, default=0.1)
 parser.add_argument("--context_size", type=int, default=1024)
 parser.add_argument("--window_size", type=int, default=1024)
-parser.add_argument("--num_samples", type=int, default=1000)
+parser.add_argument("--num_samples", type=int, default=1)
 args = parser.parse_args()
 
 
 device = "cuda"
-dataset_name = 'wikitext'
-task = 'wikitext-2-raw-v1'
+# dataset_name = 'wikitext'
+# task = 'wikitext-2-raw-v1'
+dataset_name = 'pg19'
+task = 'default'
 split = 'test'
 model_name_or_path = 'huggyllama/llama-7b'
 cache_dir = '../hf_cache'
