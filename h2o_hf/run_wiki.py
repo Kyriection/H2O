@@ -59,6 +59,7 @@ print(f"seq_len: {seq_len}")
 
 nlls = []
 prev_end_loc = 0
+visulize = True
 pbar = tqdm(range(0, seq_len, stride))
 for begin_loc in pbar:
     end_loc = min(begin_loc + max_length, seq_len)
@@ -72,12 +73,37 @@ for begin_loc in pbar:
         outputs = model(input_ids, labels=target_ids)
         neg_log_likelihood = outputs.loss
 
+    if visulize:
+        for name, m in model.named_modules():
+            if isinstance(m, LlamaAttention_heavy_hitter):
+                plt.subplot(1,4,1)
+                head_idx = 0
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.xticks([], [])
+                plt.yticks([], [])
+                plt.title('Head {}'.format(head_idx))
+                plt.subplot(1,4,2)
+                head_idx = 5
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.xticks([], [])
+                plt.yticks([], [])
+                plt.title('Head {}'.format(head_idx))
+                plt.subplot(1,4,3)
+                head_idx = 10
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.xticks([], [])
+                plt.yticks([], [])
+                plt.title('Head {}'.format(head_idx))
+                plt.subplot(1,4,4)
+                head_idx = 25
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.xticks([], [])
+                plt.yticks([], [])
+                plt.title('Head {}'.format(head_idx))
+                plt.savefig('{}.png'.format(name))
+                plt.close()
+        visulize = False
 
-    import pdb; pdb.set_trace()
-    for name, m in model.named_modules():
-        if isinstance(m, LlamaAttention_heavy_hitter):
-            print('xx: {}'.format(name))
-            pdb.set_trace()
 
     pbar.set_description(
         f"nll: {neg_log_likelihood.item():.2f}, ppl: {torch.exp(neg_log_likelihood).item():.2f}"

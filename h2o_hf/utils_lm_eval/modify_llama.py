@@ -138,13 +138,12 @@ class LlamaAttention_heavy_hitter(nn.Module):
         else:
             mask_bottom = torch.zeros_like(attn_weights, dtype=torch.bool)
 
-        self.mask_hh = mask_bottom
-
         ones = torch.ones_like(attn_weights, dtype=torch.bool)
         ones = torch.triu(ones, diagonal=-recent_budget)
         mask_bottom = torch.logical_or(mask_bottom, ones)
 
         mask_bottom = torch.tril(mask_bottom, diagonal=0)
+        self.mask_hh = mask_bottom
 
         # mask_bottom = ones
         attn_weights[~mask_bottom] = torch.min(attention_mask)
