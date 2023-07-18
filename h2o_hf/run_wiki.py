@@ -79,25 +79,25 @@ for begin_loc in pbar:
             if isinstance(m, LlamaAttention_heavy_hitter):
                 plt.subplot(1,4,1)
                 head_idx = 0
-                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int().cpu().numpy())
                 plt.xticks([], [])
                 plt.yticks([], [])
                 plt.title('Head {}'.format(head_idx))
                 plt.subplot(1,4,2)
                 head_idx = 5
-                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int().cpu().numpy())
                 plt.xticks([], [])
                 plt.yticks([], [])
                 plt.title('Head {}'.format(head_idx))
                 plt.subplot(1,4,3)
                 head_idx = 10
-                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int().cpu().numpy())
                 plt.xticks([], [])
                 plt.yticks([], [])
                 plt.title('Head {}'.format(head_idx))
                 plt.subplot(1,4,4)
                 head_idx = 25
-                plt.imshow(m.mask_hh[0, head_idx,:,:].int())
+                plt.imshow(m.mask_hh[0, head_idx,:,:].int().cpu().numpy())
                 plt.xticks([], [])
                 plt.yticks([], [])
                 plt.title('Head {}'.format(head_idx))
