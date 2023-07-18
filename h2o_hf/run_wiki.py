@@ -72,6 +72,14 @@ for begin_loc in pbar:
         outputs = model(input_ids, labels=target_ids)
         neg_log_likelihood = outputs.loss
 
+
+    import pdb; pdb.set_trace()
+    for name, m in model.named_modules():
+        if isinstance(m, LlamaAttention_heavy_hitter):
+            print(name)
+            pdb.set_trace()
+
+
     pbar.set_description(
         f"nll: {neg_log_likelihood.item():.2f}, ppl: {torch.exp(neg_log_likelihood).item():.2f}"
     )

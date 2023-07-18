@@ -77,6 +77,7 @@ class LlamaAttention_heavy_hitter(nn.Module):
 
         self.heavy_budget_ratio = config.heavy_ratio
         self.recent_budget_ratio = config.recent_ratio
+        self.mask_hh = None
 
 
     def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
@@ -136,6 +137,8 @@ class LlamaAttention_heavy_hitter(nn.Module):
             mask_bottom = local_heavy_hitter_mask(attn_weights, heavy_budget) # Default: No padding applied to input
         else:
             mask_bottom = torch.zeros_like(attn_weights, dtype=torch.bool)
+
+        self.mask_hh = mask_bottom
 
         ones = torch.ones_like(attn_weights, dtype=torch.bool)
         ones = torch.triu(ones, diagonal=-recent_budget)
