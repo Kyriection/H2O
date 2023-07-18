@@ -78,8 +78,6 @@ for begin_loc in pbar:
         if isinstance(m, LlamaAttention_heavy_hitter):
             print('xx: {}'.format(name))
             pdb.set_trace()
-        else:
-            print(name)
 
     pbar.set_description(
         f"nll: {neg_log_likelihood.item():.2f}, ppl: {torch.exp(neg_log_likelihood).item():.2f}"
