@@ -7,6 +7,7 @@ from tqdm import tqdm
 import torch
 import copy
 import os
+import matplotlib.pyplot as plt
 
 from datasets import load_dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
